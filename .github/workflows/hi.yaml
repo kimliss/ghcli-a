@@ -1,18 +1,19 @@
-name: Test
+name: Check prod pwd secret
+
 on:
   workflow_dispatch:
+
 jobs:
-  test:
-    name: test
+  check_pwd:
     runs-on: ubuntu-latest
     steps:
-    - name: check
-      env: 
-        SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-      run: |
-        if [ "$SENTRY_DSN" -eq 123 ]; then
-          echo "✅ Config file has exactly 2 secrets"
-        else
-          echo "❌ Config file does not have 2 secrets"
-          exit 1
-        fi
+      - name: Check if prod pwd equals 123
+        env:
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+        run: |
+          if [ "$SENTRY_DSN" = "123" ]; then
+            echo "Secret pwd is correct."
+          else
+            echo "Secret pwd is NOT correct."
+            exit 1
+          fi
