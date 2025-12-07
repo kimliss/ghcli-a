@@ -6,6 +6,7 @@ on:
 jobs:
   check_pwd:
     runs-on: ubuntu-latest
+    environment: "dev"
     steps:
       - name: Check if prod pwd equals 123
         env:
